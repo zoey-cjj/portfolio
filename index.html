@@ -1,0 +1,1843 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>陈郡 · AI产品经理作品集</title>
+<style>
+/* ========== 全局重置 ========== */
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0a0a14;
+  --accent:#6c63ff;
+  --accent-light:#a29bfe;
+  --accent-glow:rgba(108,99,255,0.3);
+  --accent-red:#c0392b;
+  --card-bg:rgba(22,22,48,0.88);
+  --card-border:rgba(108,99,255,0.22);
+  --text:#e8e8f0;
+  --text-dim:#a0a0b8;
+  --gradient:linear-gradient(135deg,#6c63ff 0%,#a29bfe 50%,#74b9ff 100%);
+  --gradient-red:linear-gradient(135deg,#c0392b 0%,#e74c3c 100%);
+  --gradient-subtle:linear-gradient(135deg,rgba(108,99,255,0.08) 0%,rgba(162,155,254,0.04) 100%);
+}
+
+/* ========== 基础样式 ========== */
+body{
+  font-family:'PingFang SC','Microsoft YaHei','WenQuanYi Micro Hei',sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.7;
+  overflow-x:hidden;
+}
+
+a{color:var(--accent-light);text-decoration:none}
+img{max-width:100%;display:block}
+
+/* ========== 导航栏 ========== */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  background:rgba(13,15,20,0.92);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(124,92,255,0.15);
+  padding:14px 40px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+nav .logo{font-size:18px;font-weight:700;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+nav .links{display:flex;gap:28px}
+nav .links a{color:var(--text-dim);font-size:14px;transition:color .2s}
+nav .links a:hover{color:var(--accent-light)}
+
+/* ========== Section 通用 ========== */
+section{
+  position:relative;
+  padding:90px 40px 70px;
+  overflow:hidden;
+  border-top:1px solid transparent;
+  border-bottom:1px solid transparent;
+  isolation:isolate;
+}
+
+/* Hero 区域强制隔离，绝不显示其他section内容 */
+#hero{
+  overflow:hidden !important;
+  z-index:2;
+}
+#hero *{
+  max-height:none;
+}
+/* 确保hero的glow不会撑出边界 */
+#hero .glow{
+  position:absolute;
+  z-index:-1;
+}
+/* Hero不使用通用分割线，用自己的遮罩 */
+#hero::before{display:none}
+#hero::after{
+  content:'';
+  position:absolute;
+  bottom:0;left:0;right:0;
+  height:150px;
+  background:linear-gradient(180deg,rgba(13,15,20,0) 0%,#0d0f14 100%);
+  pointer-events:none;
+  z-index:5;
+}
+section::before{
+  content:'';position:absolute;top:0;left:10%;right:10%;height:1px;
+  background:linear-gradient(90deg,transparent,var(--accent),transparent);
+  opacity:.5;
+}
+section::after{
+  content:'';position:absolute;bottom:0;left:10%;right:10%;height:1px;
+  background:linear-gradient(90deg,transparent,var(--accent),transparent);
+  opacity:.3;
+}
+
+/* 交替背景 */
+#hero{background:linear-gradient(160deg,#0d0f14 0%,#1a0e2e 50%,#0d0f14 100%);min-height:100vh;display:flex;align-items:center;justify-content:center;padding-bottom:120px;clip-path:inset(0 0 0 0);height:100vh}
+/* Hero底部淡出遮罩，防止下方section内容漏出 */
+#hero::after{
+  content:'';
+  position:absolute;
+  bottom:0;left:0;right:0;
+  height:150px;
+  background:linear-gradient(180deg,rgba(13,15,20,0) 0%,#0d0f14 100%);
+  pointer-events:none;
+  z-index:5;
+}
+#about{
+  background:linear-gradient(160deg,#0d0f14 0%,#0f1525 50%,#0d0f14 100%);
+  z-index:1;position:relative;
+  margin-top:0;
+  padding-top:100px;
+}
+/* 关于我顶部渐变遮罩，彻底挡住向上溢出的内容 */
+#about{
+  -webkit-mask-image:linear-gradient(180deg,#000 0%,#000 100%);
+  mask-image:linear-gradient(180deg,#000 0%,#000 100%);
+}
+#ai{background:linear-gradient(160deg,#0d0f14 0%,#1a0e2e 50%,#0d0f14 100%)}
+#yun3{background:linear-gradient(160deg,#0f1525 0%,#1a1025 50%,#0f1525 100%)}
+#faq{background:linear-gradient(160deg,#0d0f14 0%,#0f1525 50%,#0d0f14 100%)}
+#skills{background:linear-gradient(160deg,#1a0e2e 0%,#0f1525 50%,#1a0e2e 100%)}
+#contact{background:linear-gradient(160deg,#0d0f14 0%,#1a0e2e 50%,#0d0f14 100%);min-height:70vh;display:flex;align-items:center;justify-content:center;flex-direction:column}
+
+/* 背景光晕 */
+.glow{position:absolute;border-radius:50%;filter:blur(80px);opacity:.15;pointer-events:none}
+.glow-1{width:500px;height:500px;background:#7c5cff;top:-100px;right:-100px}
+.glow-2{width:400px;height:400px;background:#6c63ff;bottom:-80px;left:-80px}
+.glow-3{width:350px;height:350px;background:#c0392b;top:30%;left:60%;z-index:-1;clip-path:inset(0 0 0 0)}
+
+/* ========== 容器 ========== */
+.container{max-width:1100px;margin:0 auto;position:relative;z-index:1}
+
+/* ========== 标题 ========== */
+.section-title{
+  font-size:36px;font-weight:800;margin-bottom:8px;
+  display:flex;align-items:center;gap:14px;
+}
+.section-title::before{
+  content:'';width:4px;height:32px;
+  background:var(--gradient);border-radius:2px;
+  box-shadow:0 0 12px rgba(124,92,255,.5);
+}
+.section-subtitle{color:var(--text-dim);font-size:15px;margin-bottom:40px;padding-left:18px}
+
+/* ========== 标签 ========== */
+.tag-row{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:30px;padding-left:18px}
+.tag{
+  display:inline-block;padding:4px 14px;border-radius:20px;
+  font-size:12px;font-weight:600;
+  background:rgba(108,99,255,0.12);border:1px solid rgba(108,99,255,0.3);
+  color:var(--accent-light);
+}
+.tag.red{background:rgba(192,57,43,0.12);border-color:rgba(192,57,43,0.3);color:#e74c3c}
+.tag.cyan{background:rgba(108,99,255,0.1);border-color:rgba(108,99,255,0.25);color:var(--accent-light)}
+
+/* ========== Hero ========== */
+.hero-badge{
+  display:inline-block;padding:6px 20px;border-radius:30px;
+  background:rgba(108,99,255,0.15);border:1px solid rgba(108,99,255,0.35);
+  color:var(--accent-light);font-size:14px;font-weight:600;margin-bottom:24px;
+}
+.hero h1{font-size:56px;font-weight:900;line-height:1.2;margin-bottom:16px}
+.hero h1 .highlight{background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero p{font-size:18px;color:var(--text-dim);max-width:680px;margin-bottom:36px}
+.hero-tags{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:40px}
+.hero-tags span{
+  padding:8px 18px;border-radius:8px;
+  background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);
+  font-size:14px;color:var(--text-dim);
+}
+.hero-btns{display:flex;gap:16px;flex-wrap:wrap}
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:12px 28px;border-radius:10px;font-size:15px;font-weight:600;
+  transition:all .25s;cursor:pointer;border:none;
+}
+.btn-primary{background:var(--gradient);color:#fff;box-shadow:0 4px 20px rgba(124,92,255,.35)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(124,92,255,.5)}
+.btn-outline{background:transparent;color:var(--text);border:1px solid rgba(255,255,255,.2)}
+.btn-outline:hover{border-color:var(--accent-light);color:var(--accent-light)}
+
+/* ========== 卡片 ========== */
+.card{
+  background:var(--card-bg);border:1px solid var(--card-border);
+  border-radius:16px;padding:28px;margin-bottom:28px;
+  backdrop-filter:blur(8px);
+  box-shadow:0 8px 32px rgba(0,0,0,.3);
+  transition:transform .25s,box-shadow .25s;
+}
+.card:hover{transform:translateY(-1.5px);box-shadow:0 8px 28px rgba(124,92,255,.12)}
+
+/* ========== 双列布局 ========== */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.three-col{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+@media(max-width:768px){.two-col,.three-col{grid-template-columns:1fr}}
+
+/* ========== 时间轴 ========== */
+.timeline{position:relative;padding-left:30px;margin-top:30px}
+.timeline::before{content:'';position:absolute;left:6px;top:0;bottom:0;width:2px;background:linear-gradient(180deg,var(--accent),transparent)}
+.tl-item{position:relative;margin-bottom:28px}
+.tl-item::before{
+  content:'';position:absolute;left:-26px;top:6px;width:12px;height:12px;
+  border-radius:50%;background:var(--accent);box-shadow:0 0 10px var(--accent);
+}
+.tl-item .tl-time{font-size:13px;color:var(--accent-light);font-weight:600;margin-bottom:4px}
+.tl-item .tl-title{font-size:16px;font-weight:700;margin-bottom:4px}
+.tl-item .tl-desc{font-size:14px;color:var(--text-dim);line-height:1.6}
+
+/* ========== 项目区块（外层大卡片，无hover动效） ========== */
+.project-block{
+  background:rgba(18,18,42,0.7);
+  border:1px solid rgba(124,92,255,0.12);
+  border-radius:20px;
+  padding:44px 40px;
+  margin-bottom:48px;
+  backdrop-filter:blur(6px);
+  transition:none;
+}
+.project-block h3{font-size:24px;font-weight:800;margin-bottom:6px;display:flex;align-items:center;gap:10px}
+.project-block h3 .emoji{font-size:28px}
+.project-block .sub{color:var(--text-dim);font-size:14px;margin-bottom:24px}
+
+/* ========== 数据卡片 ========== */
+.data-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin:28px 0 36px}
+@media(max-width:768px){.data-grid{grid-template-columns:1fr}}
+.data-card{
+  background:linear-gradient(135deg,rgba(124,92,255,0.08),rgba(0,212,255,0.05));
+  border:1px solid rgba(124,92,255,0.2);
+  border-radius:14px;padding:24px;text-align:center;
+}
+.data-card .num{font-size:36px;font-weight:900;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.data-card .label{font-size:13px;color:var(--text-dim);margin-top:4px}
+
+/* ========== 反思卡片 ========== */
+.reflect{
+  background:rgba(124,92,255,0.06);border-left:3px solid var(--accent);
+  border-radius:0 12px 12px 0;padding:20px 24px;margin-top:64px;
+}
+.reflect h4{font-size:15px;color:var(--accent-light);margin-bottom:8px}
+.reflect ul{list-style:none;padding:0}
+.reflect li{font-size:14px;color:var(--text-dim);padding:4px 0;padding-left:18px;position:relative}
+.reflect li::before{content:'→';position:absolute;left:0;color:var(--accent)}
+
+/* ========== 占位图 ========== */
+.placeholder{
+  background:linear-gradient(135deg,#1a1a3e,#0f0f28);
+  border:2px dashed rgba(124,92,255,0.3);
+  border-radius:14px;padding:60px 20px;text-align:center;
+  margin:0 0 28px 0;
+}
+/* 统一间距：data-grid下方、placeholder之间全部28px */
+.project-block > .data-grid{margin:28px 0 28px}
+.project-block > .placeholder{margin:0 0 28px 0}
+/* 第一个placeholder紧贴data-grid，间距由data-grid的margin-bottom控制 */
+/* 连续两个placeholder只保留一个间距 */
+.placeholder + .placeholder{
+  margin-top:28;
+  margin-bottom:28px;
+}
+.placeholder .ph-icon{font-size:48px;margin-bottom:12px}
+.placeholder .ph-title{font-size:18px;font-weight:700;margin-bottom:8px}
+.placeholder .ph-desc{font-size:14px;color:var(--text-dim);max-width:500px;margin:0 auto;line-height:1.6}
+
+/* ========== 图片展示区 ========== */
+.img-showcase{
+  background:rgba(18,18,42,0.6);border:1px solid rgba(124,92,255,0.15);
+  border-radius:14px;padding:24px;margin:32px 0;
+}
+.img-showcase img{border-radius:10px;margin-bottom:12px}
+.img-showcase .img-caption{font-size:13px;color:var(--text-dim);text-align:center}
+
+/* ========== PRD截图展示区 ========== */
+.prd-showcase{
+  background:rgba(18,18,42,0.55);
+  border:1px solid rgba(124,92,255,0.15);
+  border-radius:14px;
+  padding:22px 24px;
+  margin-bottom:24px;
+  transition:border-color .3s,box-shadow .3s;
+}
+.prd-showcase:hover{
+  border-color:rgba(215,210,255,0.5)!important;
+  box-shadow:0 0 0 1px rgba(215,210,255,0.15),0 0 14px rgba(215,210,255,0.12),0 4px 18px rgba(108,99,255,0.08);
+}
+.prd-img-wrap{
+  background:#fff;
+  border-radius:10px;
+  padding:8px;
+  margin-bottom:14px;
+  overflow:hidden;
+}
+.prd-img{
+  width:100%;
+  height:auto;
+  border-radius:6px;
+  display:block;
+}
+.prd-caption{
+  display:flex;
+  flex-direction:column;
+  gap:4px;
+}
+.prd-caption strong{
+  font-size:14px;
+  color:#fff;
+  font-weight:700;
+}
+.prd-caption p{
+  font-size:13px;
+  color:var(--text-dim);
+  line-height:1.6;
+  margin:0;
+}
+.prd-num{
+  display:inline-block;
+  width:22px;height:22px;
+  line-height:22px;
+  text-align:center;
+  border-radius:50%;
+  background:var(--gradient);
+  color:#fff;
+  font-size:11px;
+  font-weight:800;
+  margin-bottom:4px;
+}
+
+/* ========== 技能条 ========== */
+.skill-bar{margin-bottom:18px}
+.skill-bar .label{display:flex;justify-content:space-between;margin-bottom:6px;font-size:14px}
+.skill-bar .track{height:8px;background:rgba(255,255,255,0.06);border-radius:4px;overflow:hidden}
+.skill-bar .fill{height:100%;border-radius:4px;background:var(--gradient);transition:width 1s}
+
+/* ========== 联系卡片 ========== */
+.contact-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin:30px 0}
+@media(max-width:768px){.contact-cards{grid-template-columns:1fr}}
+.contact-card{
+  background:rgba(28,28,60,0.88);
+  border:1px solid rgba(120,100,255,0.28);
+  border-radius:16px;padding:28px;text-align:center;
+  box-shadow:0 12px 32px rgba(0,0,0,.35);
+  transition:transform .25s;
+}
+.contact-card:hover{transform:translateY(-2px)}
+.contact-card .icon{font-size:32px;margin-bottom:12px}
+.contact-card .ct-label{font-size:13px;color:var(--text-dim);margin-bottom:4px}
+.contact-card .ct-value{font-size:16px;font-weight:700}
+
+/* ========== 社交按钮 ========== */
+.social-row{display:flex;gap:14px;justify-content:center;margin-top:30px;flex-wrap:wrap}
+.social-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:10px 22px;border-radius:10px;
+  background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);
+  color:var(--text);font-size:14px;transition:all .25s;
+}
+.social-btn:hover{border-color:var(--accent-light);color:var(--accent-light)}
+
+/* ========== 页脚 ========== */
+footer{text-align:center;padding:30px;color:var(--text-dim);font-size:13px;border-top:1px solid rgba(255,255,255,.05)}
+
+/* ========== 滚动动画 ========== */
+.fade-in{opacity:0;transform:translateY(30px);transition:opacity .8s,transform .8s}
+.fade-in.visible{opacity:1;pan:translateY(0)}
+
+/* ========== 流程步骤 ========== */
+.flow-steps{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin:16px 0}
+.flow-step{
+  padding:8px 16px;border-radius:8px;
+  background:rgba(124,92,255,0.1);border:1px solid rgba(124,92,255,0.25);
+  font-size:13px;font-weight:600;color:var(--accent-light);
+}
+.flow-arrow{color:var(--accent);font-size:18px}
+
+/* ========== 对比布局 ========== */
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:28px 0}
+@media(max-width:768px){.compare{grid-template-columns:1fr}}
+.compare-box{
+  background:rgba(18,18,42,0.6);border:1px solid rgba(124,92,255,0.15);
+  border-radius:12px;padding:20px;text-align:center;
+}
+.compare-box .cb-label{font-size:12px;color:var(--text-dim);margin-bottom:8px;text-transform:uppercase;letter-spacing:1px}
+.compare-box .cb-title{font-size:18px;font-weight:700;margin-bottom:12px}
+
+/* ========== 问题标签 ========== */
+.issue-tags{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}
+.issue-tag{
+  padding:6px 14px;border-radius:20px;font-size:12px;
+  background:rgba(192,57,43,0.1);border:1px solid rgba(192,57,43,0.25);
+  color:#e74c3c;
+}
+
+/* ========== 竞品表格 ========== */
+.table-wrap{overflow-x:auto;margin:20px 0;border-radius:12px;border:1px solid rgba(124,92,255,0.15)}
+table{width:100%;border-collapse:collapse;font-size:14px}
+thead{background:rgba(124,92,255,0.2)}
+th{padding:12px 16px;text-align:left;font-weight:700;color:var(--accent-light);border-bottom:1px solid rgba(108,99,255,0.2)}
+td{padding:10px 16px;border-bottom:1px solid rgba(255,255,255,0.05);color:var(--text-dim)}
+tr:hover td{background:rgba(124,92,255,0.05)}
+td .dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--accent-light);margin-right:4px}
+td .dash{color:rgba(255,255,255,0.2)}
+
+/* ========== 图表占位 ========== */
+.chart-placeholder{
+  background:rgba(18,18,42,0.5);border:1px solid rgba(124,92,255,0.1);
+  border-radius:12px;padding:30px;text-align:center;margin:28px 0;
+}
+.chart-placeholder .ch-title{font-size:15px;font-weight:700;margin-bottom:8px}
+.chart-placeholder .ch-desc{font-size:13px;color:var(--text-dim)}
+
+/* ========== 三栏改版模块 ========== */
+.rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin:28px 0 32px}
+@media(max-width:768px){.rev-grid{grid-template-columns:1fr}}
+.rev-card{
+  background:rgba(22,22,48,0.85);border:1px solid rgba(108,99,255,0.2);
+  border-radius:14px;padding:24px;
+  transition:transform .25s,box-shadow .25s;
+}
+.rev-card:hover{transform:translateY(-1.5px);box-shadow:0 6px 22px rgba(108,99,255,.08)}
+.rev-card .rev-num{font-size:13px;color:var(--accent-light);font-weight:700;margin-bottom:8px}
+.rev-card h4{font-size:17px;font-weight:800;margin-bottom:12px;color:#fff}
+.rev-card ul{list-style:none;padding:0}
+.rev-card li{font-size:13px;color:var(--text-dim);padding:4px 0;padding-left:16px;position:relative;line-height:1.5}
+.rev-card li::before{content:'•';position:absolute;left:0;color:var(--accent)}
+
+/* ========== 品牌色展示 ========== */
+.color-swatches{display:flex;gap:16px;margin:16px 0;flex-wrap:wrap}
+.swatch{text-align:center}
+.swatch .sw-color{width:80px;height:80px;border-radius:12px;margin-bottom:6px;border:2px solid rgba(255,255,255,0.1)}
+.swatch .sw-label{font-size:11px;color:var(--text-dim)}
+
+/* ========== 统一交互亮边效果 ========== */
+/* 核心思路：hover/active/focus 时边框亮起极淡紫色 + 外发光 */
+
+/* --- 通用卡片：hover 亮边（不含 project-block）--- */
+.card,
+.rev-card,
+.data-card,
+.compare-box,
+.img-showcase,
+.placeholder,
+.contact-card,
+.social-btn,
+.btn,
+.issue-tag,
+.flow-step,
+.table-wrap,
+.chart-placeholder{
+  transition:border-color .3s,box-shadow .3s,transform .25s,background .3s;
+}
+
+/* hover：更浅淡紫色 + 柔和光晕 */
+.card:hover,
+.rev-card:hover,
+.data-card:hover,
+.compare-box:hover,
+.img-showcase:hover,
+.placeholder:hover,
+.contact-card:hover,
+.social-btn:hover,
+.issue-tag:hover,
+.flow-step:hover,
+.chart-placeholder:hover{
+  border-color:rgba(215,210,255,0.5)!important;
+  box-shadow:0 0 0 1px rgba(215,210,255,0.15),0 0 14px rgba(215,210,255,0.12),0 4px 18px rgba(108,99,255,0.08);
+}
+
+/* active（点击瞬间）：极淡紫 + 微缩 */
+.card:active,
+.rev-card:active,
+.data-card:active,
+.compare-box:active,
+.contact-card:active,
+.social-btn:active,
+.btn:active{
+  border-color:rgba(215,210,255,0.65)!important;
+  box-shadow:0 0 0 1px rgba(215,210,255,0.22),0 0 18px rgba(215,210,255,0.18),inset 0 0 6px rgba(215,210,255,0.06);
+  transform:scale(0.997);
+}
+
+/* focus（键盘/点击后保持）：极淡紫边 */
+.card:focus,
+.contact-card:focus,
+.social-btn:focus,
+.btn:focus{
+  outline:none;
+  border-color:rgba(215,210,255,0.5)!important;
+  box-shadow:0 0 0 1px rgba(215,210,255,0.18),0 0 12px rgba(215,210,255,0.1);
+}
+
+/* --- 导航链接：hover/active 增强 --- */
+nav .links a{
+  position:relative;
+  padding:4px 2px;
+}
+nav .links a::after{
+  content:'';
+  position:absolute;left:0;right:0;bottom:-4px;
+  height:2px;border-radius:1px;
+  background:var(--accent-light);
+  transform:scaleX(0);transform-origin:center;
+  transition:transform .25s,box-shadow .25s;
+}
+nav .links a:hover::after,
+nav .links a:active::after{
+  transform:scaleX(1);
+  box-shadow:0 0 8px rgba(215,210,255,0.35);
+}
+nav .links a:active{
+  text-shadow:0 0 10px rgba(215,210,255,0.3);
+}
+
+/* --- 表格行：hover 亮边 --- */
+tbody tr{
+  transition:box-shadow .25s,border-color .25s;
+}
+tbody tr:hover td{
+  border-bottom-color:rgba(162,155,254,0.4);
+  box-shadow:inset 3px 0 0 rgba(162,155,254,0.5);
+}
+
+/* --- 时间轴节点：hover 发光 --- */
+.tl-item::before{
+  transition:box-shadow .3s,transform .3s;
+}
+.tl-item:hover::before{
+  box-shadow:0 0 10px rgba(215,210,255,0.45),0 0 20px rgba(108,99,255,0.18);
+  transform:scale(1.06);
+}
+
+/* --- 技能标签：hover 亮边 --- */
+.skill-tag,
+.tag{
+  transition:border-color .25s,box-shadow .25s,color .25s;
+}
+.skill-tag:hover,
+.tag:hover{
+  border-color:rgba(215,210,255,0.45);
+  box-shadow:0 0 8px rgba(215,210,255,0.12);
+  color:#fff;
+}
+
+/* --- 表格容器：hover 亮边 --- */
+.table-wrap:hover{
+  border-color:rgba(215,210,255,0.4);
+  box-shadow:0 0 12px rgba(215,210,255,0.1);
+}
+
+/* ========== 项目内部统一间距系统 ========== */
+/* 所有区块之间统一 28px，绝不出现双倍间距 */
+.project-block h3{margin-bottom:10px}
+.project-block .sub{margin-bottom:28px}
+.project-block > p{margin-bottom:20px}
+.project-block > div{margin-top:0}
+.project-block .three-col > .card,
+.project-block .two-col > .card,
+.project-block .two-col > div,
+.project-block .two-col > .compare-box,
+.project-block .compare > .compare-box,
+.project-block .rev-grid > .rev-card{
+  margin-bottom:0;
+}
+/* 核心规则：data-grid / placeholder / img-showcase 全部上下各28px，且相邻不叠加 */
+.project-block > .data-grid{margin:28px 0}
+.project-block > .placeholder{margin:0 0 28px 0}
+.project-block > .placeholder + .placeholder{margin-top:0;margin-bottom:28px}
+.project-block > .img-showcase{margin:0 0 28px 0}
+.project-block > .reflect{margin-top:28px}
+.project-block > .table-wrap{margin:28px 0}
+.project-block > .flow-steps{margin:16px 0 20px}
+.project-block > .issue-tags{margin:16px 0 8px}
+.project-block > .color-swatches{margin:16px 0 24px}
+.project-block > div[style*="margin-top"] h4,
+.project-block > div h4{margin-bottom:14px}
+.project-block h4{margin-bottom:12px;margin-top:0}
+.project-block h5{margin-bottom:6px}
+</style>
+</head>
+<body>
+
+<!-- ========== 导航 ========== -->
+<nav>
+  <div class="logo">陈郡 · 作品集</div>
+  <div class="links">
+    <a href="#about">关于我</a>
+    <a href="#ai">AI助手</a>
+    <a href="#yun3">云族谱3.0</a>
+    <a href="#faq">FAQ知识库</a>
+    <a href="#skills">技能全景</a>
+    <a href="#contact">联系我</a>
+  </div>
+</nav>
+
+<!-- ========== 首页 Hero ========== -->
+<section id="hero">
+  <div class="glow glow-1"></div>
+  <div class="glow glow-2"></div>
+  <div class="container hero" style="text-align:center">
+    <div class="hero-badge">🎯 求职意向：AI产品经理</div>
+    <h1>用产品思维<br><span class="highlight">驱动AI应用落地</span></h1>
+    <p style="margin:0 auto 36px">4年+产品与设计复合经验，兼具用户体验直觉与AI工具落地能力。从0到1搭建Dify知识库助手，主导云族谱3.0全链路改版，擅长将模糊需求转化为结构化产品方案。</p>
+    <div class="hero-tags" style="justify-content:center">
+      <span>🤖 AI应用产品</span>
+      <span>📱 移动端产品</span>
+      <span>🎨 UI/UX设计</span>
+      <span>📊 数据驱动</span>
+      <span>🔄 全链路交付</span>
+    </div>
+    <div class="hero-btns" style="justify-content:center">
+      <a href="#yun3" class="btn btn-primary">查看核心项目 →</a>
+      <a href="#contact" class="btn btn-outline">联系我</a>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 关于我 ========== -->
+<section id="about">
+  <div class="glow glow-3"></div>
+  <div class="container">
+    <div class="section-title">关于我</div>
+    <div class="section-subtitle">4年+产品与设计复合经验</div>
+
+    <div class="two-col">
+      <div class="card">
+        <h3 style="margin-bottom:12px">💡 核心能力</h3>
+        <ul style="list-style:none;padding:0">
+          <li style="padding:6px 0;font-size:14px">• 需求挖掘与场景拆解（问卷/访谈/数据分析）</li>
+          <li style="padding:6px 0;font-size:14px">• PRD撰写与信息架构设计</li>
+          <li style="padding:6px 0;font-size:14px">• UI/UX设计 + 交互流程优化</li>
+          <li style="padding:6px 0;font-size:14px">• 用户行为分析与数据驱动迭代</li>
+          <li style="padding:6px 0;font-size:14px">• 跨团队协作（研发/设计/运营）</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3 style="margin-bottom:12px">🤖 AI产品能力</h3>
+        <ul style="list-style:none;padding:0">
+          <li style="padding:6px 0;font-size:14px">• Dify搭建知识库问答助手</li>
+          <li style="padding:6px 0;font-size:14px">• Prompt工程与Few-shot优化</li>
+          <li style="padding:6px 0;font-size:14px">• RAG检索增强与幻觉控制</li>
+          <li style="padding:6px 0;font-size:14px">• 工作流编排与Agent设计</li>
+          <li style="padding:6px 0;font-size:14px">• AI竞品分析与体验评估</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 时间轴 -->
+    <div style="margin-top:40px">
+      <h3 style="font-size:20px;font-weight:800;margin-bottom:8px">📌 职业经历</h3>
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-time">2024.09 – 2026.03 · 白梭梭</div>
+          <div class="tl-title">产品助理</div>
+          <div class="tl-desc">主导跨境支付FAQ知识库结构化建设，搭建Dify AI问答助手原型，高频问题命中率85%</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-time">2021.07 – 2023.12 · 金信云服</div>
+          <div class="tl-title">产品经理 + UI设计师</div>
+          <div class="tl-desc">云族谱APP从0到1产品负责人，主导3.0全链路改版（表现层/交互层/功能层），下载量+80.5%、拉新+77.8%、活跃度+87.3%</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-time">2019.03 – 2021.03 · 网罗天下</div>
+          <div class="tl-title">UI设计师</div>
+          <div class="tl-desc">负责多款移动端产品的视觉设计与交互规范制定</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-time">2025.01 – 2025.02 · 个人项目</div>
+          <div class="tl-title">🤖 Dify AI助手原型</div>
+          <div class="tl-desc">基于Dify搭建FAQ知识库问答助手，覆盖50+高频问题，准确率85%，验证RAG在垂直场景的可行性</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== AI助手项目 ========== -->
+<section id="ai">
+  <div class="glow glow-1"></div>
+  <div class="container">
+    <div class="section-title">云族谱 AI 智能助手</div>
+    <div class="section-subtitle">基于 Dify 搭建的知识库问答原型</div>
+
+    <div class="tag-row">
+      <span class="tag">个人项目</span>
+      <span class="tag">2025.01 – 2025.02</span>
+      <span class="tag">Dify + GPT + 飞书表格</span>
+      <span class="tag">独立完成</span>
+    </div>
+
+    <div class="project-block">
+      <h3><span class="emoji">🤖</span> 项目背景与目标</h3>
+      <p class="sub">探索“AI+OCR+知识库”在传统文化数字化场景的可行性，解决老旧族谱查阅难、成员关系梳理繁琐的痛点</p>
+      <p style="font-size:14px;color:var(--text-dim);line-height:1.8">
+        面向家族文化传承需求，利用多模态OCR与GraphRAG技术，搭建一款能自动识别老旧族谱图像并生成可视化成员关系树状图的智能助手原型。无需人工录入，通过零代码平台快速集成OCR解析与AI问答能力，实现族谱资料的低成本数字化与智能交互。
+      </p>
+
+      <div style="margin-top:24px">
+        <h4 style="font-size:16px;margin-bottom:12px">核心贡献</h4>
+        <ul style="list-style:none;padding:0">
+          <li style="padding:5px 0;font-size:14px">• OCR识别与结构化：针对模糊老旧族谱图像，设计OCR预处理流程，精准提取人物姓名、生卒年及亲属关系等关键实体。</li>
+          <li style="padding:5px 0;font-size:14px">• 图谱生成与可视化：编写GraphRAG提示词，将非结构化的族谱文本转化为结构化关系数据，自动渲染成多层成员关系树状图。</li>
+          <li style="padding:5px 0;font-size:14px">• 族谱智能问答：构建家族FAQ知识库，设计“模糊姓氏匹配→关系推理→溯源解答”的工作流，支持用户自然语言查询辈分与亲属关系。</li>
+          <li style="padding:5px 0;font-size:14px">• 效果评估：制定族谱实体识别准确率与关系推导合理性的测试用例集，迭代优化OCR模型与AI提示词参数。</li>
+        </ul>
+      </div>
+
+   <!-- 数据成果 -->
+      <div class="data-grid" style="margin-bottom:60px">
+        <div class="data-card">
+          <div class="num">100+</div>
+          <div class="label">老旧族谱影像</div>
+        </div>
+        <div class="data-card">
+          <div class="num">90%+​</div>
+          <div class="label">关系抽取准确率</div>
+        </div>
+        <div class="data-card">
+          <div class="num">2周</div>
+          <div class="label">零代码MVP交付</div>
+        </div>
+      </div>
+
+     <!-- 智能问答 GIF -->
+<figure class="demo-figure" style="margin-bottom: 28px;">
+  <img 
+    src="qa-demo.gif" 
+    alt="云族谱智能问答助手对话演示" 
+    class="demo-gif"
+    loading="lazy"
+  >
+  
+  <!-- 替换原来的 figcaption，改为卡片样式 -->
+  <div style="
+    background-color: #1a1a1a;
+    border: 1px solid #333333;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-top: 12px;
+    color: #ffffff;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  ">
+    <span style="
+  display: inline-block;
+  background-image: linear-gradient(135deg, #a78bfa 0%, #6b5ce7 100%);
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: bold;
+  width: 28px;
+  height: 28px;
+  line-height: 28px;
+  text-align: center;
+  border-radius: 50%;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 6px rgba(107, 92, 231, 0.4);
+">01</span>
+    
+    <h4 style="
+      color: #A29BFE;
+      font-size: 17px;
+      font-weight: bold;
+      margin: 0 0 8px 0;
+      line-height: 1.4;
+    ">智能问答：用户提问「居安的儿子是谁」→ RAG 检索知识库 → 准确回答「惠民」并标注引用来源</h4>
+    
+    <p style="
+      font-size: 14px;
+      line-height: 1.6;
+      color: #aaaaaa;
+      margin: 0;
+    ">设计邀请入族完整闭环：支持链接/二维码/手机号三种方式，区分未注册用户（下载→授权→自动入族→完善信息）与已注册用户（直接入族→推送通知）两条路径，并定义用户在家族树中的定位锚点。</p>
+  </div>
+</figure>
+
+<!-- 识图提取 GIF -->
+<figure class="demo-figure" style="margin-bottom: 40px;">
+  <img 
+    src="ocr-demo.gif" 
+    alt="老旧族谱OCR识别与结构化提取演示" 
+    class="demo-gif"
+    loading="lazy"
+  >
+  
+  <!-- 替换原来的 figcaption，改为卡片样式 -->
+  <div style="
+    background-color: #1a1a1a;
+    border: 1px solid #333333;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-top: 12px;
+    color: #ffffff;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  ">
+    <span style="
+  display: inline-block;
+  background-image: linear-gradient(135deg, #a78bfa 0%, #6b5ce7 100%);
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: bold;
+  width: 28px;
+  height: 28px;
+  line-height: 28px;
+  text-align: center;
+  border-radius: 50%;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 6px rgba(107, 92, 231, 0.4);
+">02</span>
+    
+    <h4 style="
+      color: #A29BFE;
+      font-size: 17px;
+      font-weight: bold;
+      margin: 0 0 8px 0;
+      line-height: 1.4;
+    ">识图提取：上传模糊族谱图片 → OCR + LLM 结构化 → 输出 JSON 数据及美观族谱卡片</h4>
+    
+    <p style="
+      font-size: 14px;
+      line-height: 1.6;
+      color: #aaaaaa;
+      margin: 0;
+    ">设计邀请入族完整闭环：支持链接/二维码/手机号三种方式，区分未注册用户（下载→授权→自动入族→完善信息）与已注册用户（直接入族→推送通知）两条路径，并定义用户在家族树中的定位锚点。</p>
+  </div>
+</figure>
+
+     <!-- PRD展示卡 — 对话流程与兜底策略 -->
+
+<!-- 流程图 -->
+<figure class="demo-figure" style="margin-bottom: 28px;">
+  <img 
+    src="prd-flowchart.png" 
+    alt="云族谱AI智能助手RAG完整流程图及边界条件" 
+    class="demo-gif"
+    loading="lazy"
+  >
+  
+  <div style="
+    background-color: #1a1a1a;
+    border: 1px solid #333333;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-top: 12px;
+    color: #ffffff;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  ">
+    <span style="
+      display: inline-block;
+      background-image: linear-gradient(135deg, #a78bfa 0%, #6b5ce7 100%);
+      color: #ffffff;
+      font-size: 13px;
+      font-weight: bold;
+      width: 28px;
+      height: 28px;
+      line-height: 28px;
+      text-align: center;
+      border-radius: 50%;
+      margin-bottom: 10px;
+      box-shadow: 0 2px 6px rgba(107, 92, 231, 0.4);
+    ">03</span>
+    
+    <h4 style="
+      color: #A29BFE;
+      font-size: 17px;
+      font-weight: bold;
+      margin: 0 0 8px 0;
+      line-height: 1.4;
+    ">智能问答完整流程图：涵盖状态流转（S0-S6）、异常分支（E2/E3/E4）及六大边界条件约束</h4>
+    
+    <p style="
+      font-size: 14px;
+      line-height: 1.6;
+      color: #aaaaaa;
+      margin: 0;
+    ">从用户输入到答案返回的完整状态机设计，包含意图识别→RAG检索→LLM生成→安全审核→用户反馈全链路，以及知识库无匹配、安全拦截、负面反馈等异常分支的兜底策略。</p>
+  </div>
+</figure>
+
+<!-- 异常分支处理表 -->
+<figure class="demo-figure" style="margin-bottom: 28px;">
+  <img 
+    src="prd-exception-table.png" 
+    alt="异常分支处理详情表（E1-E6）" 
+    class="demo-gif"
+    loading="lazy"
+  >
+  
+  <div style="
+    background-color: #1a1a1a;
+    border: 1px solid #333333;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-top: 12px;
+    color: #ffffff;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  ">
+    <span style="
+      display: inline-block;
+      background-image: linear-gradient(135deg, #a78bfa 0%, #6b5ce7 100%);
+      color: #ffffff;
+      font-size: 13px;
+      font-weight: bold;
+      width: 28px;
+      height: 28px;
+      line-height: 28px;
+      text-align: center;
+      border-radius: 50%;
+      margin-bottom: 10px;
+      box-shadow: 0 2px 6px rgba(107, 92, 231, 0.4);
+    ">04</span>
+    
+    <h4 style="
+      color: #A29BFE;
+      font-size: 17px;
+      font-weight: bold;
+      margin: 0 0 8px 0;
+      line-height: 1.4;
+    ">异常分支处理表：覆盖6种异常场景的触发条件、处理策略与兜底话术</h4>
+    
+    <p style="
+      font-size: 14px;
+      line-height: 1.6;
+      color: #aaaaaa;
+      margin: 0;
+    ">针对意图不明确、知识库无匹配、安全审核不通过、用户负面反馈、服务超时、注入攻击等6类异常场景，均设计了明确的触发条件、处理策略和兜底话术，确保系统在异常情况下依然有可控的用户体验。</p>
+  </div>
+</figure>      <!-- 反思段 -->
+      <div class="reflect">
+        <h4>💭 反思与下一步</h4>
+        <ul>
+          <li>OCR识别精度受限：针对字迹模糊或破损严重的老旧族谱，下一步计划引入图像增强预处理，并补充特定历史繁体字的微调数据集。</li>
+          <li>复杂关系推理存在幻觉：面对多代同堂的旁系亲属追问，目前兜底策略较弱，理想状态应引入GraphRAG增强图谱检索，并增加关系路径的可解释性。</li>
+          <li>知识库更新依赖手动：目前新成员或修订信息需手动导入，可探索LLM辅助的半自动实体对齐与增量更新机制，降低维护成本。</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 云族谱3.0 ========== -->
+<section id="yun3">
+  <div class="glow glow-1"></div>
+  <div class="glow glow-3"></div>
+  <div class="container">
+    <div class="section-title">云族谱 3.0 版本升级</div>
+    <div class="section-subtitle">表现层 / 交互层 / 功能层 全链路改版</div>
+
+    <div class="tag-row">
+      <span class="tag red">公司项目</span>
+      <span class="tag">2021.07 – 2023.12</span>
+      <span class="tag">产品经理 + UI设计</span>
+      <span class="tag">金信云服 · 云族谱APP</span>
+    </div>
+
+    <!-- 项目概述 -->
+    <div class="project-block">
+      <h3><span class="emoji">📱</span> 项目背景</h3>
+      <p class="sub">从0到1负责云族谱APP，并在3.0版本主导全链路改版设计</p>
+      <p style="font-size:14px;color:var(--text-dim);line-height:1.8">
+        云族谱是一款面向家族文化传承的移动端产品，核心功能包括家族树构建、族谱管理、家族社交与文化知识普及。
+        用户群体以中老年人为主，覆盖广东、福建、浙江等南方地区。3.0版本改版的核心目标：
+        <strong style="color:#fff">通过表现层视觉升级、交互层流程简化、功能层模块丰富，系统性解决留存低、转化差、迭代成本高三大问题。</strong>
+      </p>
+
+      <!-- 改版原因 -->
+      <div style="margin-top:24px">
+        <h4 style="font-size:16px;margin-bottom:12px">🔍 改版动因（三大核心问题）</h4>
+        <div class="three-col">
+          <div class="card" style="border-color:rgba(192,57,43,0.25)">
+            <div style="font-size:28px;margin-bottom:8px">📉</div>
+            <h5 style="font-size:15px;margin-bottom:6px">留存、转化率低</h5>
+            <p style="font-size:13px;color:var(--text-dim)">用户进入后找不到核心功能，次日留存<30%，付费转化接近零</p>
+          </div>
+          <div class="card" style="border-color:rgba(192,57,43,0.25)">
+            <div style="font-size:28px;margin-bottom:8px">🎨</div>
+            <h5 style="font-size:15px;margin-bottom:6px">缺乏统一规范性</h5>
+            <p style="font-size:13px;color:var(--text-dim)">视觉风格陈旧，各页面设计规范不统一，品牌感弱</p>
+          </div>
+          <div class="card" style="border-color:rgba(192,57,43,0.25)">
+            <div style="font-size:28px;margin-bottom:8px">🔧</div>
+            <h5 style="font-size:15px;margin-bottom:6px">版本迭代成本高</h5>
+            <p style="font-size:13px;color:var(--text-dim)">无统一组件库，每次改版都要从头调整，研发效率低下</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 用户调研 -->
+    <div class="project-block">
+      <h3><span class="emoji">📊</span> 用户调研与数据分析</h3>
+      <p class="sub">通过问卷调查、用户访谈、APP评价收集反馈，数据驱动改版决策</p>
+
+      <!-- 调研流程 -->
+      <div style="margin-bottom:20px">
+        <h4 style="font-size:15px;margin-bottom:10px">调研流程</h4>
+        <div class="flow-steps">
+          <div class="flow-step">发散问题</div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-step">问卷执行</div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-step">分析问卷</div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-step">需求发散</div>
+          <span class="flow-arrow">→</span>
+          <div class="flow-step">需求总结</div>
+        </div>
+      </div>
+
+      <!-- 数据分析四宫格 -->
+      <div class="two-col">
+        <div class="chart-placeholder">
+          <div class="ch-title">🗺️ 用户区域分布</div>
+          <div class="ch-desc">用户集中在南方地区（广东、福建、浙江、江苏等），建议重点宣传广粤文化、闽南文化相关内容</div>
+        </div>
+        <div class="chart-placeholder">
+          <div class="ch-title">👥 用户年龄分布</div>
+          <div class="ch-desc">中老年用户占比超70%，界面设计需遵循"简洁、大字体、少操作"原则</div>
+        </div>
+        <div class="chart-placeholder">
+          <div class="ch-title">⭐ 用户在意功能</div>
+          <div class="ch-desc">"创建家族谱"占比71.88%为最高需求，其次是家族内部社交功能</div>
+        </div>
+        <div class="chart-placeholder">
+          <div class="ch-title">📚 社区内容建设</div>
+          <div class="ch-desc">"姓氏相关文史知识"占比81.25%，用户强烈期待族谱文化内容建设</div>
+        </div>
+      </div>
+
+      <!-- 问题汇集 -->
+      <div style="margin-top:20px">
+        <h4 style="font-size:15px;margin-bottom:10px">⚠️ 用户反馈问题汇集</h4>
+        <div class="issue-tags">
+          <span class="issue-tag">视觉风格有点陈旧</span>
+          <span class="issue-tag">功能入口找不到</span>
+          <span class="issue-tag">交互不流畅</span>
+          <span class="issue-tag">谱书加载失败</span>
+          <span class="issue-tag">增加节点移动和分支合并</span>
+          <span class="issue-tag">全景图显示备注名</span>
+          <span class="issue-tag">增加撤回功能</span>
+          <span class="issue-tag">缺乏交互体验</span>
+          <span class="issue-tag">同一功能不同设计</span>
+          <span class="issue-tag">增加世系前祖功能</span>
+          <span class="issue-tag">折叠不需要的功能</span>
+          <span class="issue-tag">增加删除父辈功能</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 竞品分析 -->
+    <div class="project-block">
+      <h3><span class="emoji">🔎</span> 竞品分析</h3>
+      <p class="sub">分析族记、百家有谱、族谱网、宗谱链等竞品，确定功能范围与差异化方向</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>功能模块</th>
+              <th>族记</th>
+              <th>族谱网</th>
+              <th>百家有谱</th>
+              <th>宗谱链</th>
+              <th>我们的建议</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>活动Banner</td>
+              <td><span class="dot"></span>有</td>
+              <td><span class="dash">—</span></td>
+              <td><span class="dot"></span>有</td>
+              <td><span class="dash">—</span></td>
+              <td style="color:var(--accent-light)">加入</td>
+            </tr>
+            <tr>
+              <td>家族内部社区</td>
+              <td><span class="dot"></span>有</td>
+              <td><span class="dash">—</span></td>
+              <td><span class="dot"></span>有</td>
+              <td><span class="dash">—</span></td>
+              <td style="color:var(--accent-light)">加入</td>
+            </tr>
+            <tr>
+              <td>姓氏文化建设</td>
+              <td><span class="dash">—</span></td>
+              <td><span class="dot"></span>有</td>
+              <td><span class="dash">—</span></td>
+              <td><span class="dash">—</span></td>
+              <td style="color:var(--accent-light)">加入</td>
+            </tr>
+            <tr>
+              <td>世系图/全景图</td>
+              <td><span class="dot"></span>有</td>
+              <td><span class="dot"></span>有</td>
+              <td><span class="dot"></span>有</td>
+              <td><span class="dot"></span>有</td>
+              <td style="color:var(--accent-light)">优化升级</td>
+            </tr>
+            <tr>
+              <td>谱书/打印</td>
+              <td><span class="dot"></span>有</td>
+              <td><span class="dot"></span>有</td>
+              <td><span class="dash">—</span></td>
+              <td><span class="dash">—</span></td>
+              <td style="color:var(--accent-light)">加入</td>
+            </tr>
+            <tr>
+              <td>找人/寻亲</td>
+              <td><span class="dash">—</span></td>
+              <td><span class="dot"></span>有</td>
+              <td><span class="dash">—</span></td>
+              <td><span class="dot"></span>有</td>
+              <td style="color:var(--accent-light)">加入</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div style="margin-top:16px;padding:16px 20px;background:rgba(124,92,255,0.06);border-radius:10px;border-left:3px solid var(--accent)">
+        <p style="font-size:14px;color:var(--text-dim)">
+          <strong style="color:#fff">竞品分析结论：</strong>竞品普遍缺乏"姓氏文化+家族社交"的深度结合。
+          族记强在内部社区但文化内容弱；百家有谱强在世系图但交互陈旧。
+          <strong style="color:#fff">差异化方向：将"家族社交"与"姓氏文化知识"双线并行，打造有温度的族谱产品。</strong>
+        </p>
+      </div>
+    </div>
+
+    <!-- 改版思路总览 -->
+    <div class="project-block">
+      <h3><span class="emoji">🧭</span> 改版思路：三大层面系统性升级</h3>
+      <p class="sub">通过问卷调查和竞品分析，得出云族谱3.0的改版思路</p>
+
+      <div class="rev-grid">
+        <div class="rev-card" style="border-color:rgba(231,76,60,0.3)">
+          <div class="rev-num">LAYER 01</div>
+          <h4>🎨 优化表现层</h4>
+          <ul>
+            <li>页面风格重定义：简洁、统一、品质</li>
+            <li>品牌色确立：中国红 #721a1a</li>
+            <li>LOGO改版：蓝色云纹 → 红色印章"谱"字</li>
+            <li>Tab区与金刚区图标升级</li>
+            <li>统一视觉规范，建立组件库</li>
+            <li>家族主页卡片化 + 全景图优化</li>
+          </ul>
+        </div>
+        <div class="rev-card" style="border-color:rgba(0,212,255,0.3)">
+          <div class="rev-num">LAYER 02</div>
+          <h4>⚡ 简化交互层</h4>
+          <ul>
+            <li>全链路交互逻辑重新梳理</li>
+            <li>去除冗余流程，减少不必要操作</li>
+            <li>依据希克定律简化决策路径</li>
+            <li>首页展示逻辑优化（有/无家族双路径）</li>
+            <li>信息架构重组，功能入口分层</li>
+            <li>提升体验感与留存率</li>
+          </ul>
+        </div>
+        <div class="rev-card" style="border-color:rgba(124,92,255,0.3)">
+          <div class="rev-num">LAYER 03</div>
+          <h4>🧩 丰富功能层</h4>
+          <ul>
+            <li>用户需求重新梳理提炼</li>
+            <li>"发现"拆分为"广场"+"百科"</li>
+            <li>广场：推荐 / 寻亲 / 动态</li>
+            <li>百科：姓氏文化 / 字辈派语 / 修谱知识</li>
+            <li>新增积分商城系统</li>
+            <li>满足个性化需求，提升参与度</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 表现层详情 -->
+    <div class="project-block">
+      <h3><span class="emoji">🎨</span> 表现层 — 视觉系统重定义</h3>
+      <p class="sub">从风格定义、品牌色、LOGO到具体页面视觉的全面升级</p>
+<!-- 风格关键词 -->
+      <div style="margin-bottom:40px">
+        <h4 style="font-size:15px;margin-bottom:10px">风格定义：简洁 · 统一 · 品质</h4>
+        <p style="font-size:13px;color:var(--text-dim);margin-bottom:12px">用户群体为中老年人，以简洁、统一、品质为风格导向。</p>
+        <div class="three-col">
+          <div class="card" style="text-align:center">
+            <div style="font-size:32px;margin-bottom:8px">✨</div>
+            <h5>简洁 Concise</h5>
+            <p style="font-size:12px;color:var(--text-dim)">信息精简，操作路径最短化</p>
+          </div>
+          <div class="card" style="text-align:center">
+            <div style="font-size:32px;margin-bottom:8px">🔗</div>
+            <h5>统一 Unify</h5>
+            <p style="font-size:12px;color:var(--text-dim)">全局组件规范，视觉语言一致</p>
+          </div>
+          <div class="card" style="text-align:center">
+            <div style="font-size:32px;margin-bottom:8px">💎</div>
+            <h5>品质 Quality</h5>
+            <p style="font-size:12px;color:var(--text-dim)">中国传统元素与现代UI融合</p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- 品牌色 -->
+      <div style="margin-bottom:20px">
+        <h4 style="font-size:15px;margin-bottom:10px">品牌色体系</h4>
+        <div class="color-swatches">
+          <div class="swatch">
+            <div class="sw-color" style="background:#721a1a"></div>
+            <div class="sw-label">品牌色 #721a1a</div>
+          </div>
+          <div class="swatch">
+            <div class="sw-color" style="background:#fee4c5"></div>
+            <div class="sw-label">辅助色 #fee4c5</div>
+          </div>
+          <div class="swatch">
+            <div class="sw-color" style="background:#FADFE1"></div>
+            <div class="sw-label">辅助色 #FADFE1</div>
+          </div>
+          <div class="swatch">
+            <div class="sw-color" style="background:#333333"></div>
+            <div class="sw-label">字体色 #333</div>
+          </div>
+          <div class="swatch">
+            <div class="sw-color" style="background:#666666"></div>
+            <div class="sw-label">字体色 #666</div>
+          </div>
+          <div class="swatch">
+            <div class="sw-color" style="background:#999999"></div>
+            <div class="sw-label">字体色 #999</div>
+          </div>
+        </div>
+      </div>
+<!-- LOGO改版 -->
+<div style="margin-bottom:20px">
+  <h4 style="font-size:15px;margin-bottom:10px">LOGO改版</h4>
+  <div class="compare">
+    <div class="compare-box">
+      <div class="cb-label">Before</div>
+      <div class="cb-title">原始LOGO</div>
+      <img src="logo_before.png" alt="原始LOGO" style="width:110px;display:block;margin:10px auto;">
+      <p style="font-size:13px;color:var(--text-dim);margin-top:10px">蓝色云纹 + 房屋 + 书本组合，科技感过强，缺乏传统文化属性</p>
+    </div>
+    <div class="compare-box" style="border-color:rgba(192,57,43,0.3)">
+      <div class="cb-label" style="color:#e74c3c">After</div>
+      <div class="cb-title">全新LOGO</div>
+      <img src="logo_after.png" alt="全新LOGO" style="width:110px;display:block;margin:10px auto;">
+      <p style="font-size:13px;color:var(--text-dim);margin-top:10px">印章 + 书法"谱"字，中国红主色，传统文化元素突出，辨识度高</p>
+    </div>
+  </div>
+</div>
+   
+<!-- PRD截图展示区 -->
+<div style="margin-top:68px">
+  <h4 style="font-size:16px;margin-bottom:6px;color:var(--accent-light)">📋 PRD 展示 — 核心需求文档截图</h4>
+  <p style="font-size:13px;color:var(--text-dim);margin-bottom:20px">以下截图取自《云族谱3.0产品需求文档》，按"用户闭环 → 数据验证 → 状态策略 → 业务规则"的逻辑顺序排列。</p>
+
+  <!-- 图1：邀请与定位闭环 -->
+  <div class="prd-card">
+    <div class="prd-img-wrap">
+      <img src="prd_02_invite_crop.png" alt="云族谱3.0 PRD — 邀请与定位闭环设计" class="prd-img" loading="lazy">
+    </div>
+    <div class="prd-caption">
+      <span class="prd-num">01</span>
+      <strong>邀请与定位闭环设计</strong>
+      <p>设计邀请入族完整闭环：支持链接/二维码/手机号三种方式，区分未注册用户（下载→授权→自动入族→完善信息）与已注册用户（直接入族→推送通知）两条路径，并定义用户在家族树中的定位锚点。</p>
+    </div>
+  </div>
+
+  <!-- 图2：数据埋点与验证设计 -->
+  <div class="prd-card">
+    <div class="prd-img-wrap">
+      <img src="prd_04_data_tracking_crop.png" alt="云族谱3.0 PRD — 数据埋点与验证设计" class="prd-img" loading="lazy">
+    </div>
+    <div class="prd-caption">
+      <span class="prd-num">02</span>
+      <strong>数据埋点与验证设计</strong>
+      <p>在PRD阶段同步定义核心转化漏斗（创建路径A + 加入路径B）与功能健康度指标（家族树编辑效率、谱书阅读深度、发现/百科内容匹配度），用于改版后量化验证效果。</p>
+    </div>
+  </div>
+
+  <!-- 图3：首页状态机与多状态展示策略 -->
+  <div class="prd-card">
+    <div class="prd-img-wrap">
+      <img src="prd_01_state_machine_crop.png" alt="云族谱3.0 PRD — 首页状态机与多状态展示策略" class="prd-img" loading="lazy">
+    </div>
+    <div class="prd-caption">
+      <span class="prd-num">03</span>
+      <strong>首页状态机与多状态展示策略</strong>
+      <p>覆盖"未创建/未加入"（状态A）与"已创建/已加入"（状态B）两种核心状态下的首页展示策略、底部Tab栏状态变化、状态转换规则，以及状态A下的创建/加入/帮助流程、状态B下的顶部区域/功能区/切换家族/内容区详细设计。</p>
+    </div>
+  </div>
+
+  <!-- 图4：家族树核心业务规则 -->
+  <div class="prd-card">
+    <div class="prd-img-wrap">
+      <img src="prd_03_family_tree_crop.png" alt="云族谱3.0 PRD — 家族树核心业务规则" class="prd-img" loading="lazy">
+    </div>
+    <div class="prd-caption">
+      <span class="prd-num">04</span>
+      <strong>家族树核心业务规则</strong>
+      <p>将宗族关系中的真实业务规则转化为产品规则：5代吊线展示、姓名/家谱名搜索高亮、配偶"再婚保留前任/替换"逻辑、孩子支持单亲/领养标记、删除成员二次确认与权限校验、"是否添加到通讯录"选项。</p>
+    </div>
+  </div>
+</div>
+
+<style>
+/* ========== PRD 卡片（上图下文 + 淡紫细线边框） ========== */
+.prd-card {
+  margin-bottom: 46px;
+  background: #0f1115;
+  border-radius: 12px;
+  padding: 14px;
+  border: 1px solid transparent; /* 默认透明边框，占位防抖动 */
+  box-shadow: 0 6px 26px rgba(0,0,0,.3);
+  transition: all .3s ease;
+}
+
+.prd-card:hover {
+  border-color: rgba(185, 170, 240, 0.4); /* 淡紫色细线边框 */
+  box-shadow: 
+    0 0 0 1px rgba(195, 175, 245, 0.12),   /* 极淡光晕紧贴边框 */
+    0 10px 30px rgba(0,0,0,.4);
+  transform: translateY(-2px);
+}
+
+.prd-img-wrap {
+  border-radius: 8px;
+  overflow: hidden;
+  background: #000;
+  box-shadow: none;
+}
+
+.prd-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  filter: brightness(.97) contrast(1.02);
+}
+
+.prd-caption {
+  margin-top: 14px;
+  padding: 0 6px 4px 6px;
+}
+
+.prd-num {
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  line-height: 21px;
+  text-align: center;
+  border-radius: 50%;
+  background: var(--gradient);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 800;
+  margin-bottom: 6px;
+}
+
+.prd-caption strong {
+  display: block;
+  margin: 6px 0 8px;
+  font-size: 17px;
+  color: var(--text-strong);
+  line-height: 1.4;
+}
+
+.prd-caption p {
+  font-size: 14px;
+  line-height: 1.72;
+  color: var(--text-dim);
+  margin: 0;
+}
+</style>
+
+    <!-- 交互层详情 -->
+    <div class="project-block">
+      <h3><span class="emoji">⚡</span> 交互层 — 首页展示逻辑优化</h3>
+      <p class="sub">依据希克定律简化路径，针对"有家族/无家族"双状态设计差异化首页</p>
+
+      <div class="two-col">
+        <div class="compare-box">
+          <div class="cb-label">Before — 旧版问题</div>
+          <div class="cb-title">改版前</div>
+          <ul style="list-style:none;padding:0;text-align:left;margin-top:12px">
+            <li style="padding:5px 0;font-size:13px;color:var(--text-dim)">• 无论有无家族，首页展示逻辑相同</li>
+            <li style="padding:5px 0;font-size:13px;color:var(--text-dim)">• 核心功能入口深埋，用户找不到</li>
+            <li style="padding:5px 0;font-size:13px;color:var(--text-dim)">• 信息层级混乱，操作路径冗长</li>
+            <li style="padding:5px 0;font-size:13px;color:var(--text-dim)">• 新用户无引导，流失率高</li>
+          </ul>
+        </div>
+        <div class="compare-box" style="border-color:rgba(0,212,255,0.25)">
+          <div class="cb-label" style="color:var(--accent-light)">After — 改版后</div>
+          <div class="cb-title">差异化首页逻辑</div>
+          <ul style="list-style:none;padding:0;text-align:left;margin-top:12px">
+            <li style="padding:5px 0;font-size:13px;color:#fff">• 有家族：展示家族主页（成员动态、家族简介）</li>
+            <li style="padding:5px 0;font-size:13px;color:#fff">• 无家族：引导创建/加入 + 推荐家族列表</li>
+            <li style="padding:5px 0;font-size:13px;color:#fff">• 金刚区快捷入口（家庭树/族谱图/通讯录）</li>
+            <li style="padding:5px 0;font-size:13px;color:#fff">• 底部Tab精简为5个核心入口</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 功能层详情 -->
+    <div class="project-block">
+      <h3><span class="emoji">🧩</span> 功能层 — 族谱文化建设</h3>
+      <p class="sub">将"发现"板块细化为"广场"和"百科"，满足用户社交与文化知识双重需求</p>
+
+      <div class="two-col">
+        <div>
+          <h4 style="font-size:15px;margin-bottom:10px;color:var(--accent-light)">📢 广场（用户UGC）</h4>
+          <ul style="list-style:none;padding:0">
+            <li style="padding:5px 0;font-size:13px">• <strong>推荐</strong>：热门内容智能推荐流</li>
+            <li style="padding:5px 0;font-size:13px">• <strong>寻亲</strong>：跨家族找人功能</li>
+            <li style="padding:5px 0;font-size:13px">• <strong>动态</strong>：家族成员日常互动</li>
+            <li style="padding:5px 0;font-size:13px">• 活动专栏：节日/仪式感运营位</li>
+          </ul>
+        </div>
+        <div>
+          <h4 style="font-size:15px;margin-bottom:10px;color:var(--accent-light)">📚 百科（官方PGC）</h4>
+          <ul style="list-style:none;padding:0">
+            <li style="padding:5px 0;font-size:13px">• <strong>姓氏文化</strong>：起源、迁徙、名人</li>
+            <li style="padding:5px 0;font-size:13px">• <strong>字辈派语</strong>：各姓氏字辈查询</li>
+            <li style="padding:5px 0;font-size:13px">• <strong>修谱知识</strong>：修谱方法/规范科普</li>
+            <li style="padding:5px 0;font-size:13px">• 更多精彩：持续扩展知识库</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!-- 全景图展示优化 -->
+<div class="project-block">
+  <h3><span class="emoji">🌳</span> 全景图展示优化</h3>
+  <p class="sub">世系图是族谱产品的核心，3.0版本做了三项关键优化</p>
+
+  <div class="panorama-compare">
+    <!-- 改版前 -->
+    <div class="panorama-card before-card">
+      <div class="card-label label-before">BEFORE</div>
+      <div class="card-title">改版前全景图</div>
+      <div class="img-wrapper">
+        <img src="prd_before_panorama.png" alt="改版前全景图">
+      </div>
+      <ul class="feature-list">
+        <li>节点框小，信息密度低</li>
+        <li>纯色方块，无人物识别度</li>
+        <li>古风元素缺失</li>
+      </ul>
+    </div>
+
+    <!-- 改版后 -->
+    <div class="panorama-card after-card">
+      <div class="card-label label-after">AFTER</div>
+      <div class="card-title">改版后全景图</div>
+      <div class="img-wrapper">
+        <img src="prd_after_panorama.png" alt="改版后全景图">
+      </div>
+      <ul class="feature-list">
+        <li>节点框放大，展示更多内容</li>
+        <li>加入卡通人物头像，识别度高</li>
+        <li>传统元素融入（龙袍/官帽等）</li>
+        <li>黄色连线 + 角色区分，层次清晰</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<style>
+/* ========== 全景图对比卡片 ========== */
+.panorama-compare {
+  display: flex;
+  gap: 24px;
+  margin-top: 20px;
+}
+
+.panorama-card {
+  flex: 1;
+  background: #0f1115;
+  border-radius: 12px;
+  padding: 28px 24px 24px;
+  text-align: center;
+  border: 1px solid transparent;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: all .3s ease;
+}
+
+.panorama-card:hover {
+  transform: translateY(-2px);
+}
+
+/* Before 卡片 */
+.before-card {
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+/* After 卡片 — 淡紫色细线边框 + 悬停光晕 */
+.after-card {
+  border: 1px solid rgba(185, 170, 240, 0.4);
+}
+
+.after-card:hover {
+  border-color: rgba(195, 175, 245, 0.6);
+  box-shadow: 0 0 15px 2px rgba(140, 105, 230, 0.1);
+}
+
+/* 卡片标签 */
+.card-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .1em;
+  margin-bottom: 12px;
+}
+.label-before { color: #888; }
+.label-after { color: #e07060; }
+
+.card-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 20px;
+}
+
+/* ========== 图片容器 ========== */
+.img-wrapper {
+  margin-bottom: 20px;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #000;
+  width: 100%;
+  max-width: 380px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.img-wrapper img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* 特点列表 */
+.feature-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+  font-size: 14px;
+  color: var(--text-dim);
+  line-height: 1.8;
+  width: 100%;
+  max-width: 380px;
+}
+
+.feature-list li {
+  position: relative;
+  padding-left: 14px;
+  margin-bottom: 6px;
+}
+
+.feature-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 10px;
+  width: 4px;
+  height: 4px;
+  background: #666;
+  border-radius: 50%;
+}
+
+/* 移动端适配 */
+@media (max-width: 860px) {
+  .panorama-compare {
+    flex-direction: column;
+  }
+  .img-wrapper, .feature-list {
+    max-width: 420px;
+  }
+}
+</style>
+    <!-- 数据验证 -->
+    <div class="project-block">
+      <h3><span class="emoji">📈</span> 改版设计验证</h3>
+      <p class="sub">上线后数据全方位提升 — 改版前两个月 vs 改版后两个月对比</p>
+
+      <div class="data-grid">
+        <div class="data-card" style="border-color:rgba(192,57,43,0.3)">
+          <div class="num" style="color:#e74c3c">80.5%</div>
+          <div class="label">下载量提升</div>
+        </div>
+        <div class="data-card" style="border-color:rgba(192,57,43,0.3)">
+          <div class="num" style="color:#e74c3c">77.8%</div>
+          <div class="label">拉新量提升</div>
+        </div>
+        <div class="data-card" style="border-color:rgba(192,57,43,0.3)">
+          <div class="num" style="color:#e74c3c">87.3%</div>
+          <div class="label">活跃度提升</div>
+        </div>
+      </div>
+
+      <div style="padding:16px 20px;background:rgba(231,76,60,0.06);border-radius:10px;border-left:3px solid #e74c3c; margin-top: 64px;">
+        <p style="font-size:14px;color:var(--text-dim)">
+          <strong style="color:#fff">数据解读：</strong>下载量和拉新量的大幅提升验证了品牌视觉升级（中国红+印章LOGO）对<strong style="color:#fff">新用户吸引力</strong>的显著作用；
+          活跃度+87.3%证明首页逻辑优化和广场/百科功能上线有效<strong style="color:#fff">提升了用户回访动机和停留时长</strong>。
+        </p>
+      </div>
+
+      <!-- 反思段 -->
+      <div class="reflect">
+        <h4>💭 反思与下一步</h4>
+        <ul>
+          <li>积分商城上线3个月后出现疲劳度上升，需设计周期性更新机制和个性化奖励</li>
+          <li>广场UGC内容质量参差不齐，下一步应做内容分级 + 家族管理员审核机制</li>
+          <li>全景图在超大型家族（500+人）中仍有性能瓶颈，需探索懒加载 + 分叉展开</li>
+          <li>如果重来，会在改版前先做A/B测试验证首页双路径假设，而非全量上线</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== FAQ知识库 ========== -->
+<section id="faq">
+  <div class="glow glow-2"></div>
+  <div class="container">
+    <div class="section-title">白梭梭 · 跨境支付 FAQ 知识库</div>
+    <div class="section-subtitle">结构化建设 + AI客服数据基础</div>
+
+    <div class="tag-row">
+      <span class="tag">公司项目</span>
+      <span class="tag">2024.09 – 2026.03</span>
+      <span class="tag">产品助理</span>
+      <span class="tag">白梭梭（跨境支付）</span>
+    </div>
+
+    <div class="project-block">
+      <h3><span class="emoji">📋</span> 项目背景</h3>
+      <p class="sub">客服团队每天处理大量重复咨询，亟需结构化知识库 + AI问答能力</p>
+      <p style="font-size:14px;color:var(--text-dim);line-height:1.8">
+        白梭梭是一家跨境支付公司，用户高频咨询汇率、手续费、到账时间、合规审核等问题。
+        原有FAQ散落在多个文档中，客服查找效率低，用户自助解决率不足30%。
+        我的任务是：<strong style="color:#fff">将FAQ体系化结构化，并探索AI问答的可行性。</strong>
+      </p>
+
+      <div style="margin-top:64px">
+        <h4 style="font-size:16px;margin-bottom:12px">核心贡献</h4>
+        <ul style="list-style:none;padding:0">
+          <li style="padding:5px 0;font-size:14px">• 梳理200+高频问题，按场景/币种/用户类型三维分类</li>
+          <li style="padding:5px 0;font-size:14px">• 设计FAQ标签体系（紧急度/问题类型/适用产品线）</li>
+          <li style="padding:5px 0;font-size:14px">• 编写标准化回答模板，统一客服话术</li>
+          <li style="padding:5px 0;font-size:14px">• 搭建Dify知识库原型，验证AI自助问答可行性</li>
+          <li style="padding:5px 0;font-size:14px">• 输出知识库运营SOP，建立定期更新机制</li>
+        </ul>
+      </div>
+
+      <div class="data-grid">
+        <div class="data-card">
+          <div class="num">200+</div>
+          <div class="label">高频问题结构化</div>
+        </div>
+        <div class="data-card">
+          <div class="num">3维</div>
+          <div class="label">分类标签体系</div>
+        </div>
+        <div class="data-card">
+          <div class="num">30%→60%+</div>
+          <div class="label">自助解决率目标</div>
+        </div>
+      </div>
+
+      <!-- 反思段 -->
+      <div class="reflect" style="margin-top: 64px;">
+        <h4>💭 反思与下一步</h4>
+        <ul>
+          <li>标签体系初期靠人工打标，量大后效率低，理想方案是LLM半自动标注+人工校验</li>
+          <li>跨境支付涉及多国合规，知识库需建立"地区×币种×场景"的矩阵式索引</li>
+          <li>AI问答的幻觉风险在金融场景尤其敏感，需加强来源标注和置信度提示</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 技能全景 ========== -->
+<section id="skills">
+  <div class="glow glow-1"></div>
+  <div class="container">
+    <div class="section-title">技能全景</div>
+    <div class="section-subtitle">产品 × 设计 × AI</div>
+
+    <div class="two-col">
+      <div class="card">
+        <h3 style="margin-bottom:20px">📊 产品能力</h3>
+        <div class="skill-bar"><div class="label"><span>需求分析</span><span>90%</span></div><div class="track"><div class="fill" style="width:90%"></div></div></div>
+        <div class="skill-bar"><div class="label"><span>PRD撰写</span><span>88%</span></div><div class="track"><div class="fill" style="width:88%"></div></div></div>
+        <div class="skill-bar"><div class="label"><span>信息架构</span><span>85%</span></div><div class="track"><div class="fill" style="width:85%"></div></div></div>
+        <div class="skill-bar"><div class="label"><span>数据分析</span><span>80%</span></div><div class="track"><div class="fill" style="width:80%"></div></div></div>
+        <div class="skill-bar"><div class="label"><span>竞品分析</span><span>85%</span></div><div class="track"><div class="fill" style="width:85%"></div></div></div>
+      </div>
+      <div class="card">
+        <h3 style="margin-bottom:20px">🤖 AI能力</h3>
+        <div class="skill-bar"><div class="label"><span>Dify搭建</span><span>82%</span></div><div class="track"><div class="fill" style="width:82%"></div></div></div>
+        <div class="skill-bar"><div class="label"><span>Prompt工程</span><span>80%</span></div><div class="track"><div class="fill" style="width:80%"></div></div></div>
+        <div class="skill-bar"><div class="label"><span>RAG检索增强</span><span>75%</span></div><div class="track"><div class="fill" style="width:75%"></div></div></div>
+        <div class="skill-bar"><div class="label"><span>工作流编排</span><span>78%</span></div><div class="track"><div class="fill" style="width:78%"></div></div></div>
+        <div class="skill-bar"><div class="label"><span>AI竞品评估</span><span>80%</span></div><div class="track"><div class="fill" style="width:80%"></div></div></div>
+      </div>
+    </div>
+
+    <div class="two-col" style="margin-top:20px">
+      <div class="card">
+        <h3 style="margin-bottom:20px">🎨 设计能力</h3>
+        <div class="skill-bar"><div class="label"><span>UI设计</span><span>90%</span></div><div class="track"><div class="fill" style="width:90%"></div></div></div>
+        <div class="skill-bar"><div class="label"><span>交互设计</span><span>85%</span></div><div class="track"><div class="fill" style="width:85%"></div></div></div>
+        <div class="skill-bar"><div class="label"><span>视觉规范</span><span>88%</span></div><div class="track"><div class="fill" style="width:88%"></div></div></div>
+        <div class="skill-bar"><div class="label"><span>原型工具</span><span>90%</span></div><div class="track"><div class="fill" style="width:90%"></div></div></div>
+      </div>
+      <div class="card">
+        <h3 style="margin-bottom:20px">🔧 工具栈</h3>
+        <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:8px">
+          <span class="tag">Figma</span>
+          <span class="tag">Axure</span>
+          <span class="tag">Sketch</span>
+          <span class="tag">Dify</span>
+          <span class="tag">飞书多维表格</span>
+          <span class="tag">ProcessOn</span>
+          <span class="tag">墨刀</span>
+          <span class="tag">Notion</span>
+          <span class="tag">Python基础</span>
+          <span class="tag">SQL基础</span>
+          <span class="tag">Google Analytics</span>
+          <span class="tag">友盟</span>
+        </div>
+        <p style="font-size:13px;color:var(--text-dim);margin-top:16px;line-height:1.6">
+          复合背景是我在AI产品方向的核心差异化优势：<br>
+          能写PRD → 能画原型 → 能搭AI原型 → 能分析数据 → 能跟研发对齐，<br>
+          一个完整闭环，不需要中间反复翻译。
+        </p>
+      </div>
+    </div>
+<!-- AI竞品分析笔记 -->
+<div style="margin-top:40px">
+  <h4 style="font-size:16px;margin-bottom:6px;color:var(--accent-light)">📝 AI竞品分析笔记</h4>
+  <p style="font-size:13px;color:var(--text-dim);margin-bottom:20px">
+    针对 Notion AI、Dify、Coze 三款代表性 AI 产品进行核心场景、RAG 策略与产品定位的深度拆解。
+  </p>
+
+  <!-- 竞品对比矩阵 -->
+  <div class="prd-showcase">
+    <div class="prd-img-wrap">
+      <img src="competitor-matrix.png" alt="竞品对比矩阵" class="prd-img">
+    </div>
+    <div class="prd-caption">
+      <span class="prd-num">01</span>
+      <strong>竞品对比矩阵</strong>
+      <p>从定位、RAG深度、Prompt灵活度、适用人群四个维度横向对比 Notion AI、Dify、Coze 的差异化定位。</p>
+    </div>
+  </div>
+
+  <!-- 产品能力雷达图 -->
+  <div class="prd-showcase">
+    <div class="prd-img-wrap">
+      <img src="radar-chart.png" alt="产品能力雷达图" class="prd-img">
+    </div>
+    <div class="prd-caption">
+      <span class="prd-num">02</span>
+      <strong>产品能力雷达图</strong>
+      <p>从易用性、定制化程度、RAG能力、生态丰富度、企业级支持五个维度绘制雷达图，直观展示三款产品的优劣势。</p>
+    </div>
+  </div>
+
+  <!-- 关键结论 -->
+  <div class="prd-showcase" style="background:rgba(26,26,46,0.15) !important;border:1px solid rgba(255,255,255,0.04) !important;box-shadow:none !important;margin-bottom:160px !important">
+    <div class="prd-img-wrap">
+      <img src="key-conclusions.png" alt="关键结论" class="prd-img">
+    </div>
+    <div class="prd-caption">
+      <span class="prd-num">03</span>
+      <strong>关键结论</strong>
+      <p>AI产品正从Chat向Workflow和Agent演进，RAG的准确性与可解释性已成为核心竞争力。</p>
+    </div>
+  </div>
+</div>
+
+<!-- ========== 联系我 ========== -->
+<section id="contact" style="margin-top:0 !important;padding-top:60px !important;background:transparent !important">
+  <div class="glow glow-1"></div>
+  <div class="glow glow-2"></div>
+  <div class="container" style="text-align:center;max-width:800px">
+    <div class="section-title" style="justify-content:center">联系我</div>
+    <div class="section-subtitle" style="padding-left:0">期待与您交流AI产品经理相关机会</div>
+
+    <p style="font-size:17px;color:var(--text-dim);max-width:600px;margin:0 auto 30px">
+      如果你正在寻找兼具用户体验直觉与AI工具落地能力的产品经理，<br>
+      欢迎随时联系我，期待加入贵团队共同探索AI产品的可能性 🚀
+    </p>
+
+    <div class="contact-cards">
+      <div class="contact-card">
+        <div class="icon">📱</div>
+        <div class="ct-label">电话</div>
+        <div class="ct-value">13163246922</div>
+      </div>
+      <div class="contact-card">
+        <div class="icon">✉️</div>
+        <div class="ct-label">邮箱</div>
+        <div class="ct-value">13163246922@163.com</div>
+      </div>
+      <div class="contact-card">
+        <div class="icon">📍</div>
+        <div class="ct-label">现居</div>
+        <div class="ct-value">上海</div>
+      </div>
+    </div>
+
+    <div class="social-row" style="margin-top:42px;display:flex;justify-content:center;gap:16px;flex-wrap:wrap;padding:16px 24px;background:rgba(26,26,46,0.2);border:1px solid rgba(255,255,255,0.04);border-radius:12px;backdrop-filter:blur(8px);max-width:520px;margin-left:auto;margin-right:auto">
+      <a href="#" class="social-btn" style="background:transparent;border:1px solid rgba(255,255,255,0.08);color:var(--text-dim);padding:8px 18px;border-radius:8px;font-size:13px;text-decoration:none;transition:all 0.3s ease">📄 下载简历PDF</a>
+      <a href="#" class="social-btn" style="background:transparent;border:1px solid rgba(255,255,255,0.08);color:var(--text-dim);padding:8px 18px;border-radius:8px;font-size:13px;text-decoration:none;transition:all 0.3s ease">💻 GitHub</a>
+      <a href="#" class="social-btn" style="background:transparent;border:1px solid rgba(255,255,255,0.08);color:var(--text-dim);padding:8px 18px;border-radius:8px;font-size:13px;text-decoration:none;transition:all 0.3s ease">🤖 Dify作品体验</a>
+    </div>
+  </div>
+</section>
+<!-- ========== 页脚 ========== -->
+<footer>
+  © 2026 陈郡 · AI产品经理作品集 · 希望有机会一起交流产品心得~
+</footer>
+
+<!-- ========== 滚动动画脚本 ========== -->
+<script>
+const observer=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')});
+},{threshold:0.1});
+document.querySelectorAll('.fade-in, .card, .data-card, .rev-card, .compare-box, .contact-card').forEach(el=>{
+  el.classList.add('fade-in');observer.observe(el);
+});
+// 导航高亮
+const sections=document.querySelectorAll('section');
+const navLinks=document.querySelectorAll('nav .links a');
+window.addEventListener('scroll',()=>{
+  let cur='';
+  sections.forEach(s=>{if(window.scrollY>=s.offsetTop-120)cur=s.id});
+  navLinks.forEach(a=>{a.style.color=a.getAttribute('href')==='#'+cur?'var(--accent-light)':'var(--text-dim)'});
+});
+</script>
+
+</body>
+</html>
